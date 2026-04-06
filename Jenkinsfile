@@ -1,31 +1,33 @@
-pipeline
-agent any // Use any available agent
+pipeline {
+    agent any
 
-tools {
-maven 'Maven' // Ensure this matches the name configured in Jenkins
+    tools {
+        maven 'Maven'
+    }
 
-stages {
-stage('Checkout') {
-steps {
-git branch: 'master', url: 'https://github.com/harishbitcse82/MyMavenApp01.git'
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/Likhithagowda25/MyMavenApp'
+            }
+        }
 
-stage('Build') {
-steps {
-sh 'mvn clean package' // Run Maven build
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
 
-}
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
 
-stage('Test') {
-steps {
-sh 'mvn test' // Run unit tests
-
-}
-
-1
-
-stage('Run Application') {
-steps {
-// Start the JAR application
-sh 'java -jar target/MyMavenApp01-1.0-SNAPSHOT. jar'
-
+        stage('Run Application') {
+            steps {
+                sh 'java -jar target/MyMavenApp-1.0-SNAPSHOT.jar'
+            }
+        }
+    }
 }
